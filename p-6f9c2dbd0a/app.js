@@ -4,7 +4,7 @@ const CONFIG = {
   contactSubject: "Let's talk about my Instagram plan",
   tiers: [
     {
-      id: "guide", name: "Guide", role: "I coach. You create.",
+      id: "guide", name: "Guide", role: "Ben coaches. You create.", color: "#5ac8fa",
       price: "$500", unit: "/ month", setup: "One-time setup: $750",
       bullets: ["Daily briefing in your inbox", "Your posts rated and explained", "A monthly 60-minute strategy call"],
       detail: {
@@ -21,12 +21,12 @@ const CONFIG = {
       }
     },
     {
-      id: "copilot", name: "Co-Pilot", role: "We make it together.", rec: true,
+      id: "copilot", name: "Co-Pilot", role: "Ben and you make it together.", color: "#4fe0d6",
       price: "$1,500", unit: "/ month", setup: "One-time setup: $1,000",
       bullets: ["Everything in Guide", "Weekly 30-minute check-in", "8 scripts and 6 finished reels a month"],
       detail: {
         title: "Co-Pilot",
-        intro: "Best if you want real hand-holding while you build the habit. Our recommended place to start.",
+        intro: "Best if you want real hand-holding while you build the habit.",
         list: [
           "<b>Everything in Guide.</b>",
           "<b>Weekly check-in.</b> 30 minutes, every week, to plan and review.",
@@ -39,7 +39,7 @@ const CONFIG = {
       }
     },
     {
-      id: "dwy", name: "Done-With-You", role: "You talk. We handle the rest.",
+      id: "dwy", name: "Done-With-You", role: "You talk. Ben handles the rest.", color: "#b18cff",
       price: "$3,000+", unit: "/ month", setup: "One-time setup: $1,500",
       bullets: ["Everything in Co-Pilot", "A monthly shoot day", "12 to 16 edited reels, posted for you"],
       detail: {
@@ -135,14 +135,21 @@ const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* mail link */
 $("#ctaMail").href = `mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent(CONFIG.contactSubject)}`;
 
-/* package cards */
+/* package cards + involvement scale */
 const cards = $("#cards");
+const scale = $("#scale");
+const N = CONFIG.tiers.length;
+scale.innerHTML = `
+  <div class="scale-head"><span>Less of Ben</span><b>Ben's involvement</b><span>More of Ben</span></div>
+  <div class="scale-track"><i></i>${CONFIG.tiers.map((t, i) =>
+    `<button class="dot" data-dot="${t.id}" style="--c:${t.color};--s:${14 + i * 8}px;left:${(2 * i + 1) / (2 * N) * 100}%" aria-label="${t.name}"><span>${t.name}</span></button>`).join("")}</div>`;
 CONFIG.tiers.forEach((t, i) => {
   const el = document.createElement("article");
-  el.className = "card" + (t.rec ? " rec" : "");
+  el.className = "card";
+  el.id = "tier-" + t.id;
+  el.style.setProperty("--c", t.color);
   el.style.transitionDelay = `${i * 0.12}s`;
   el.innerHTML = `
-    ${t.rec ? '<span class="badge">Recommended</span>' : ""}
     <h3>${t.name}</h3><p class="role">${t.role}</p>
     <div class="price">${t.price}<small> ${t.unit}</small></div>
     <p class="setup">${t.setup}</p>
@@ -150,6 +157,13 @@ CONFIG.tiers.forEach((t, i) => {
     <button class="link-btn" data-tier="${t.id}">See what is included</button>`;
   cards.appendChild(el);
 });
+function focusTier(id) {
+  const on = cards.dataset.focus === id ? "" : id;
+  cards.dataset.focus = on;
+  $$(".dot").forEach(d => d.classList.toggle("on", d.dataset.dot === on));
+  if (on && innerWidth < 900) $("#tier-" + on).scrollIntoView({ behavior: "smooth", block: "center" });
+}
+$$(".dot").forEach(d => d.addEventListener("click", () => focusTier(d.dataset.dot)));
 
 /* peers */
 const peers = $("#peers");

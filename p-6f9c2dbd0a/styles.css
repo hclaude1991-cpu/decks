@@ -165,19 +165,29 @@ section{position:relative;padding:140px 24px}
 /* packages */
 .packages .lede{margin-left:auto;margin-right:auto}
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1180px;margin:72px auto 0;align-items:stretch}
-.card{background:#1c1c1e;border:1px solid #2c2c2e;border-radius:var(--radius);padding:36px 30px;display:flex;flex-direction:column;opacity:0;transform:translateY(40px);transition:all .9s var(--ease)}
+.scale{max-width:1180px;margin:72px auto 0}
+.scale-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:16px;color:var(--night-ink2);margin-bottom:26px}
+.scale-head b{color:var(--night-ink);font-size:17px;font-weight:600}
+.scale-track{position:relative;height:6px;border-radius:6px;background:linear-gradient(90deg,#5ac8fa,#4fe0d6 50%,#b18cff);margin-bottom:62px}
+.scale-track i{position:absolute;right:-2px;top:-5px;width:0;height:0;border-left:12px solid #b18cff;border-top:8px solid transparent;border-bottom:8px solid transparent}
+.dot{position:absolute;top:50%;width:var(--s);height:var(--s);transform:translate(-50%,-50%);border-radius:50%;background:var(--c);border:0;box-shadow:0 0 0 6px #000,0 0 0 8px var(--c);transition:transform .3s var(--ease)}
+.dot span{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);white-space:nowrap;font-size:16px;font-weight:600;color:var(--c)}
+.dot:hover,.dot.on{transform:translate(-50%,-50%) scale(1.25)}
+.dot:focus-visible{outline:3px solid #fff;outline-offset:6px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1180px;margin:0 auto;align-items:stretch}
+.card{background:#1c1c1e;border:1px solid #2c2c2e;border-top:5px solid var(--c);border-radius:var(--radius);padding:36px 30px;display:flex;flex-direction:column;opacity:0;transform:translateY(40px);transition:all .9s var(--ease)}
 .card.in{opacity:1;transform:none}
-.card.rec{background:linear-gradient(170deg,#0f2f2e,#14203a);border-color:var(--accent-d);position:relative}
-.badge{position:absolute;top:-14px;left:30px;background:var(--accent-d);color:#00201f;font-size:14px;font-weight:700;padding:5px 14px;border-radius:999px}
-.card h3{font-size:28px;letter-spacing:-.02em}
+.cards[data-focus] .card{opacity:.5;transition:opacity .4s}
+.cards[data-focus="guide"] #tier-guide,.cards[data-focus="copilot"] #tier-copilot,.cards[data-focus="dwy"] #tier-dwy{opacity:1;box-shadow:0 0 0 1px var(--c),0 20px 60px -20px var(--c)}
+.card h3{font-size:28px;letter-spacing:-.02em;color:var(--c)}
 .role{color:var(--night-ink2);font-size:17px;margin:4px 0 22px}
-.price{font-size:52px;font-weight:700;letter-spacing:-.03em;line-height:1}
-.price small{font-size:19px;font-weight:500;color:var(--night-ink2)}
+.price{font-size:clamp(38px,4.2vw,50px);font-weight:700;letter-spacing:-.03em;line-height:1;white-space:nowrap}
+.price small{font-size:17px;font-weight:500;color:var(--night-ink2)}
 .setup{font-size:16px;color:var(--night-ink2);margin:8px 0 24px}
 .card ul{list-style:none;display:grid;gap:12px;margin-bottom:28px;flex:1}
 .card li{padding-left:28px;position:relative;font-size:18px;line-height:1.35}
-.card li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--accent-d);border-bottom:2.5px solid var(--accent-d);transform:rotate(-45deg)}
-.card .link-btn{margin-top:0}
+.card li::before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2.5px solid var(--c);border-bottom:2.5px solid var(--c);transform:rotate(-45deg)}
+.card .link-btn{margin-top:0;color:var(--c)}
 .extras{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 44px;margin-top:56px}
 .extras .link-btn{margin-top:0}
 
@@ -217,6 +227,7 @@ table.rates td:last-child{text-align:right;font-weight:600;white-space:nowrap}
   .nav-links{display:none}
   .split,.safe-inner{grid-template-columns:1fr;gap:48px}
   .cards{grid-template-columns:1fr}
+  .scale-head{font-size:14px}
   .peers{grid-template-columns:1fr 1fr}
   .loop{grid-template-columns:1fr 1fr;row-gap:36px}.loop::before{display:none}
   .bars li{grid-template-columns:1fr;gap:6px}
