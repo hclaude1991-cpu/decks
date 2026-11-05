@@ -168,9 +168,9 @@ CONFIG.peers.forEach((p, i) => {
   const el = document.createElement("a");
   el.className = "peer"; el.href = `https://www.instagram.com/${p.handle}/`; el.target = "_blank"; el.rel = "noopener";
   el.style.transitionDelay = `${i * 0.1}s`;
-  el.innerHTML = `<p class="role">${p.role}</p><h3>${p.name}</h3><p class="handle">@${p.handle}</p>
-    <div class="big">${p.followers}</div><p class="lbl">followers</p>
-    <div class="big sm">${p.best}</div><p class="lbl">views on a recent Reel</p>`;
+  el.innerHTML = `<img src="img/${p.handle}.jpg" alt="${p.name}" width="104" height="104" loading="lazy">
+    <h3>${p.name}</h3><p class="handle">${p.role}</p>
+    <div class="stats"><div><b>${p.followers}</b><span>followers</span></div><div><b class="sm">${p.best}</b><span>recent Reel views</span></div></div>`;
   peers.appendChild(el);
 });
 
