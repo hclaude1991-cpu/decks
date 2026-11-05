@@ -87,17 +87,6 @@ const CONFIG = {
       ],
       note: "Early on, ratings stay gentle: what worked, plus one thing to change. Fuller scores come once you are comfortable."
     },
-    safe: {
-      title: "Dental caution flags",
-      intro: "Dentistry has rules that most creators never think about. The system points them out so you do not have to remember them all.",
-      list: [
-        "<b>Before and after photos and results claims.</b>",
-        "<b>Patients on camera or named.</b> Consent and privacy matter here.",
-        "<b>Words like cure or painless,</b> and other strong promises.",
-        "<b>Medical advice claims</b> that deserve a careful second look."
-      ],
-      note: "These are friendly nudges, not legal advice. For anything unclear, check with the Tennessee Board of Dentistry or your own counsel. You always make the final call."
-    },
     setup: {
       title: "One-time setup",
       intro: "Everything that gets you ready to post, done once.",
