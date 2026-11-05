@@ -154,7 +154,7 @@ CONFIG.tiers.forEach((t, i) => {
     <div class="price">${t.price}<small> ${t.unit}</small></div>
     <p class="setup">${t.setup}</p>
     <ul>${t.bullets.map(b => `<li>${b}</li>`).join("")}</ul>
-    <button class="link-btn" data-tier="${t.id}">See what is included</button>`;
+    <button class="link-btn" data-tier="${t.id}">See details</button>`;
   cards.appendChild(el);
 });
 function focusTier(id) {
